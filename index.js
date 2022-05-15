@@ -1,7 +1,22 @@
 let threeDDiv = document.querySelector("#three");
 let rangeInput = document.querySelector("#range-input");
+let thumbValue = document.querySelector("#thumb-value");
+let thumbText = document.querySelector("#thumb-text")
 
 async function threeD() {
+
+            // thumb
+            thumbValue.innerHTML = `<b>${rangeInput.value}<b>`;
+            thumbValue.style.fontFamily = 'Roboto';
+            thumbValue.style.fontSize = '16px';
+            thumbValue.style.color = '#FFF8F2';
+
+            thumbText.style.fontFamily = 'Roboto';
+            thumbText.style.fontSize = '16px';
+            thumbText.style.color = '#FFF8F2';
+            thumbText.style.marginTop = '-58px';
+            thumbText.style.marginLeft = '-175px';
+
 
     let dimensions = {
         width: window.innerWidth,
@@ -13,7 +28,8 @@ async function threeD() {
         left: 70,
         },
     };
- 
+
+
     threeDDiv.setAttribute("style", "width :" + dimensions.width + "px; height :" + dimensions.height + "px");
 
     const scene = new THREE.Scene();
@@ -30,14 +46,6 @@ async function threeD() {
     // renderer.shadowMapType = THREE.PCFSoftShadowMap;
 
     threeDDiv.appendChild(renderer.domElement);
-
-
-
-    // const light = new THREE.HemisphereLight(0xFFFFFF, 0.8);
-    // scene.add(lights);
-
-    // const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.9 );
-    // scene.add( directionalLight );
 
     let ambientLight = new THREE.AmbientLight(0x666666, 1);
 
@@ -73,53 +81,6 @@ async function threeD() {
 
     const light2 = new THREE.PointLight( 0xff0000, 4, 10000 );
     light2.position.set( 0, 20, 0 );
-    // const light2 = new THREE.DirectionalLight(0xdfebff, 1.75);
-    // light2.position.set(-200, 50, -50);
-
-    // light2.castShadow = true;
-    // light2.shadow.mapSize.width = 100;
-    // light2.shadow.mapSize.height = 100;
-
-    // light2.shadow.radius = 5;
-
-    // var d = 100;
-
-    // light2.shadow.camera.left = -d;
-    // light2.shadow.camera.right = d;
-    // light2.shadow.camera.top = d;
-    // light2.shadow.camera.bottom = -d;
-
-    // light2.shadow.camera.far = 1000;
-    // light2.shadowDarkness = 0.75;
-
-    // scene.add( light2 );
-
-
-
-    // const light2 = new THREE.DirectionalLight(0xdfebff, 1.75);
-    // light2.position.set(-200, 250, -200);
-    // light2.position.multiplyScalar(1.3);
-
-    // light2.castShadow = false;
-    // // light.shadowCameraVisible = true;
-
-    // light2.shadow.mapSize.width = 5000;
-    // light2.shadow.mapSize.height = 5000;
-
-    // light2.shadow.radius = 40;
-
-    // var d = 100;
-
-    // light2.shadow.camera.left = -d;
-    // light2.shadow.camera.right = d;
-    // light2.shadow.camera.top = d;
-    // light2.shadow.camera.bottom = -d;
-
-    // light2.shadow.camera.far = 1000;
-    // light2.shadowDarkness = 0.75;
-
-    // scene.add(light2);
-
 
 
     camera.position.set(-dimensions.height/1.5,dimensions.height/1.8,dimensions.height*1.7);
@@ -129,6 +90,7 @@ async function threeD() {
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
     controls.autoRotate = true;
+    controls.autoRotateSpeed *= -1;
 
     controls.addEventListener('start', function(){
         controls.autoRotate = false;
@@ -189,6 +151,25 @@ async function threeD() {
                               child.receiveShadow = true;
                             }
                          });
+
+                             // labels
+
+    // const earthDiv = document.createElement( 'div' );
+    // earthDiv.className = 'label';
+    // earthDiv.textContent = 'Earth';
+    // earthDiv.style.marginTop = '-1em';
+    // const earthLabel = new CSS2DObject( earthDiv );
+    // earthLabel.position.set( 0, EARTH_RADIUS, 0 );
+    // loadedGLTF.add( earthLabel );
+    // earthLabel.layers.set( 0 );
+
+    // // label renderer
+
+    // labelRenderer = new CSS2DRenderer();
+	// labelRenderer.setSize( window.innerWidth, window.innerHeight );
+	// labelRenderer.domElement.style.position = 'absolute';
+	// labelRenderer.domElement.style.top = '0px';
+	// document.body.appendChild( labelRenderer.domElement );
     
                         init();
             
@@ -268,21 +249,33 @@ async function threeD() {
 
                 loadGLTFRoof("assets/gltfs/roof 1.glb");
                 loadGLTFBase("assets/gltfs/base 1.glb");
+
+                thumbText.style.marginLeft = '-175px';
+
             } else if(rangeInput.value == 2){
                 scene.remove.apply(scene, scene.children);
 
                 loadGLTFRoof("assets/gltfs/roof 2.glb");
                 loadGLTFBase("assets/gltfs/base 2.glb");
+
+                thumbText.style.marginLeft = '-60px';
+
             } else if(rangeInput.value == 3){
                 scene.remove.apply(scene, scene.children);
 
                 loadGLTFRoof("assets/gltfs/roof 3.glb");
                 loadGLTFBase("assets/gltfs/base 3.glb");
+
+                thumbText.style.marginLeft = '60px';
+
             } else if(rangeInput.value == 4){
                 scene.remove.apply(scene, scene.children);
 
                 loadGLTFRoof("assets/gltfs/roof 4.glb");
                 loadGLTFBase("assets/gltfs/base 4.glb");
+
+                thumbText.style.marginLeft = '175px';
+
             }
 
             // scene.add( gridHelper );
@@ -291,6 +284,15 @@ async function threeD() {
             scene.add(ambientLight);
             scene.add(plane);
 
+            // thumb
+            thumbValue.innerHTML = `<b>${rangeInput.value}<b>`;
+            thumbValue.style.fontFamily = 'Roboto';
+            thumbValue.style.fontSize = '16px';
+            thumbValue.style.color = '#FFF8F2';
+
+            thumbText.style.fontFamily = 'Roboto';
+            thumbText.style.fontSize = '16px';
+            thumbText.style.color = '#FFF8F2';
 
         })
 
@@ -302,6 +304,9 @@ async function threeD() {
     const gridHelper = new THREE.GridHelper( size, divisions );
     // scene.add( gridHelper );
 
+
+
+    // animate function
 
     function animate() {
 
@@ -318,5 +323,6 @@ async function threeD() {
 }
 
 threeD();
+
 
 
