@@ -149,6 +149,12 @@ button, #download-button {
 transition:color 0.2s;
 }
 
+a {
+    text-decoration: none;
+    all:unset;
+    cursor: pointer;
+}
+
 @media (max-width:1000px) {
     #left-info {
         display:none;
